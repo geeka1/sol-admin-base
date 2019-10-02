@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../../models/usuario.model';
 import { URL_SERVICIOS } from '../../config/config';
 import 'rxjs/add/operator/map';
-import * as swal from 'sweetalert';
+// import * as swal from 'sweetalert';
+import swal from 'sweetalert';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
@@ -123,7 +124,6 @@ this._subirArchivoService.subirArchivo(archivo, 'usuarios', id)
       swal('Imagen Actualizada', this.usuario.nombre, 'success');
       this.guardarStorage(id, this.token, this.usuario);
       console.log( 'RESPUESTA LUEGO DE SUBIR ARCHIVO', resp );
-
     })
     .catch( resp => {
       console.log( 'ERROR: AL SUBIR ARCHIVO', resp );

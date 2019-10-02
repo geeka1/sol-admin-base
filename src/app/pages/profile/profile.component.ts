@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario.model';
+// import { Usuario } from 'src/app/models/usuario.model';
+import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
-import * as swal from 'sweetalert';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ export class ProfileComponent implements OnInit {
 
   usuario: Usuario;
   imagenSubir: File;
-  imagenTemp: string;
+  imagenTemp: any;
 
   constructor(
     public _usuarioService: UsuarioService
@@ -51,7 +52,7 @@ export class ProfileComponent implements OnInit {
     }
     this.imagenSubir = archivo;
 
-    //vanilla java script
+    // vanilla java script
 
     let reader = new FileReader();
     let urlImagenTemp = reader.readAsDataURL(archivo);
