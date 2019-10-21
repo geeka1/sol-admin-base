@@ -98,23 +98,25 @@ export class UsuarioService {
 
   actualizarUsuario( usuario: Usuario) {
 
-    let url = URL_SERVICIOS + '/usuarios/' + usuario._id;
+    let url = URL_SERVICIOS + '/usuario/' + usuario._id;
     url += '?token=' + this.token;
     console.log('URL' + url);
 
     return this.http.put(url, usuario)
             .map((resp: any) => {
-              // this.usuario = resp.usuario;
-              let usuarioDB: Usuario = resp.usuario;
-
-              this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+              // Si el usuario q recibo es igual al usuario Logueado
+              if ( usuario._id === this.usuario._id ) {
+                  // this.usuario = resp.usuario;
+                  let usuarioDB: Usuario = resp.usuario;
+                  this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+                  console.log('Paso por el actuliazar');
+              }
               swal('Usuario actualizado', usuario.nombre, 'success');
+              console.log('Tendria q enviar mensjito');
               return true;
             });
 
   }
-
-
 
 cambiarImagen( archivo: File, id: string ) {
 
@@ -128,6 +130,32 @@ this._subirArchivoService.subirArchivo(archivo, 'usuarios', id)
     .catch( resp => {
       console.log( 'ERROR: AL SUBIR ARCHIVO', resp );
     });
+}
+
+
+cargarUsuarios(desde: number = 0) {
+  let url = URL_SERVICIOS + '/usuario?desde=' + desde;
+
+  return this.http.get(url);
+
+}
+
+buscarUsuarios( termino: string ) {
+
+  let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+  return this.http.get(url)
+        .map(( resp: any ) => resp.usuarios);
+
+}
+ 
+borrarUsuario(id: string) {
+  let url = URL_SERVICIOS + '/usuario/' + id;
+  url += '?token=' + this.token;
+  return this.http.delete( url )
+      .map( resp => {
+        swal('Usuario borrado', 'El usario ha sido eliminado correctamente', 'success');
+        return true;
+      });
 }
 
 }
