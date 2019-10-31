@@ -6,7 +6,6 @@ import { ModalUploadService } from '../../components/modal-upload/modal-upload.s
 
 declare var swal: any;
 
-
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -15,7 +14,6 @@ declare var swal: any;
 export class UsuariosComponent implements OnInit {
   usuarios: Usuario[] = [];
   desde: number = 0;
-
   totalRegistros: number = 0;
   cargando: boolean = true;
 
@@ -32,9 +30,7 @@ export class UsuariosComponent implements OnInit {
   }
   mostrarModal(id: string) {
     this._modalUploadService.mostrarModal( 'usuarios', id);
-
   }
-
 
   cargarUsuarios() {
     this.cargando = true;
@@ -58,7 +54,6 @@ export class UsuariosComponent implements OnInit {
     }
     this.desde += valor;
     this.cargarUsuarios();
-
   }
 
   buscarUsuario(termino: string) {
@@ -66,14 +61,12 @@ export class UsuariosComponent implements OnInit {
       this.cargarUsuarios();
       return;
     }
-
     console.log(termino);
     this._usuarioService.buscarUsuarios(termino)
     .subscribe( (usuarios: Usuario[]) => {
       console.log('USUARIOS... ', usuarios);
       this.usuarios = usuarios;
       });
-
   }
 
   borrarUsuario(usuario: Usuario) {
@@ -100,7 +93,6 @@ export class UsuariosComponent implements OnInit {
           });
       }
     });
-
   }
 
   guardarUsuario(usuario: Usuario) {

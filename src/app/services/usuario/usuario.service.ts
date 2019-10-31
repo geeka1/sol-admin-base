@@ -112,7 +112,7 @@ export class UsuarioService {
                   console.log('Paso por el actuliazar');
               }
               swal('Usuario actualizado', usuario.nombre, 'success');
-              console.log('Tendria q enviar mensjito');
+              console.log('Tendria q enviar mensajito');
               return true;
             });
 
@@ -139,6 +139,10 @@ cargarUsuarios(desde: number = 0) {
   return this.http.get(url);
 
 }
+cargarHospitales(desde: number = 0) {
+  let url = URL_SERVICIOS + '/hospital?desde=' + desde;
+  return this.http.get(url);
+}
 
 buscarUsuarios( termino: string ) {
 
@@ -147,8 +151,7 @@ buscarUsuarios( termino: string ) {
         .map(( resp: any ) => resp.usuarios);
 
 }
- 
-borrarUsuario(id: string) {
+borrarUsuario( id: string ) {
   let url = URL_SERVICIOS + '/usuario/' + id;
   url += '?token=' + this.token;
   return this.http.delete( url )
